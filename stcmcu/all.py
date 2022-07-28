@@ -7,7 +7,8 @@ from selenium.common.exceptions import NoSuchElementException
 
 account_list = {
 # Accounts
-"<Username>" : "<Passwd>",
+"<Username1>" : "<Passwd1>",
+"<Username2>" : "<Passwd2>"
 }
 
 f = open('website.txt', encoding='utf-8')
@@ -53,7 +54,7 @@ for account in account_list:
         js = ''
         count = 0
 
-        logging.info('Download loop starting')
+        logging.info('Loop launched')
         for i in rd:
             js = 'window.open("' + webpage[i] + '");'
             driver.execute_script(js)
@@ -72,8 +73,7 @@ for account in account_list:
                     time.sleep(1)
                     driver.get("https://www.stmcu.com.cn/User/UserCenter")
                     time.sleep(1)
-                    cur_points_read = driver.find_element(By.CLASS_NAME, "zt_r").text
-                    cur_points = int(cur_points_read)
+                    cur_points = int(driver.find_element(By.CLASS_NAME, "zt_r").text)
                     award_points = cur_points - initial_points
                     if award_points >= 297:
                         logging.info('Account %s gained %d - %d = %d points',
